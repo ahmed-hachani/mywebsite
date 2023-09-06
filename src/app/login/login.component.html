@@ -1,0 +1,23 @@
+<body>
+  <div class="bg">
+      <div class="shape"></div>
+      <div class="shape"></div>
+  </div>
+  <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+      <h3>Welcome Back! <span>Login to your account</span></h3>
+
+      <label for="username">Username</label>
+      <input type="text" placeholder="enter id esprit" ngModel
+      name="username"
+      id="username" required>
+
+      <label for="password">Password</label>
+      <input type="password" placeholder="enter password" ngModel
+      name="password"
+      id="password" required>
+      <div *ngIf="showError" class="error-message">Invalid credentials. Please try again.</div>
+
+      <button type="submit" value="Login">Sign in</button>
+      <a href="/register" value="Register">Register</a>
+  </form>
+</body>

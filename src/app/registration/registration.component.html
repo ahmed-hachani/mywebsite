@@ -1,0 +1,36 @@
+<!-- registration.component.html -->
+<body>
+<div class="bg">
+  <div class="shape"></div>
+  <div class="shape"></div>
+</div>
+<form [formGroup]="registrationForm" (ngSubmit)="onSubmit()" class="registration-form">
+  <h3>Welcome to esprit! <span>Create your account</span></h3>
+
+  <label for="username">Username:</label>
+  <input type="text" id="username" formControlName="username" class="registration-input" />
+  <div *ngIf="registrationForm.get('username')?.hasError('required')" class="error-message">Username is required.</div>
+
+
+  <label for="email">Email:</label>
+  <input type="email" id="email" formControlName="email" class="registration-input" />
+  <div *ngIf="registrationForm.get('email')?.hasError('required')" class="error-message">Email is required.</div>
+  <div *ngIf="registrationForm.get('email')?.hasError('email')" class="error-message">Invalid email format.</div>
+
+  <label for="password">Password:</label>
+  <input type="password" id="password" formControlName="password" class="registration-input" />
+  <div *ngIf="registrationForm.get('password')?.hasError('required')" class="error-message">Password is required.</div>
+  <div *ngIf="registrationForm.get('password')?.hasError('minlength')" class="error-message">Password must be at least 6 characters long.</div>
+
+  <label for="role">Role:</label>
+  <select id="role" formControlName="role" class="registration-input">
+    <option value="['PROFESSOR']">Professor</option>
+    <option value="['STUDENT']">Student</option>
+    <option value="['ADMINISTRATIVE_AGENT']">Administrative Agent</option>
+  </select>
+
+  <button type="submit" class="registration-button">Register</button>
+  <div *ngIf="showError" class="error-message">{{ errorMessage }}</div>
+  <a href="/login" value="">Already have an account, login instead</a>
+</form>
+</body>

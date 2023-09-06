@@ -1,0 +1,115 @@
+<div class="container">
+  <div class="card mt-5" style="align-items: center">
+    <h1>Admin Dashboard</h1>
+    <div class="chart-container">
+      <canvas  id="genderChart" >{{ chart }}</canvas>
+</div>
+  </div>
+  <div class="card mt-5" style="padding: 20px">
+    <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+      <div class="form-group">
+        <label for="name">User Name :</label>
+        <input type="text" #username="ngModel" (ngModel)="(username)" name="username" id="username1" class="form-control"
+          placeholder="User Name" />
+      </div>
+      <div class="form-group">
+        <label for="email">User Email :</label>
+        <input type="email" #email (ngModel)="(email)" name="email" id="email1" class="form-control"
+          placeholder="User Email" />
+      </div>
+      <div class="form-group">
+        <label for="role">User Role :</label>
+        <input type="text" #role (ngModel)="(role)" name="role" id="role1" class="form-control"
+          placeholder="User Role" />
+      </div>
+      <div class="form-group">
+        <label for="name">User Password :</label>
+        <input type="password" #password (ngModel)="(password)" name="password" id="password1" class="form-control"
+          placeholder="User Password" />
+      </div>
+      <div class="form-group">
+        <input type="submit" value="Register" class="btn btn-primary w-100" />
+      </div>
+    </form>
+  </div>
+  <div class="mt-5">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>id</th>
+          <th>userName</th>
+          <th>email</th>
+          <th>Role</th>
+          <th>gender</th>
+          <th>Edit</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody class="tbody">
+        <tr *ngFor="let user of UserDetails">
+          <td>{{ user.id }}</td>
+          <td>{{ user.username }}</td>
+          <td>{{ user.email }}</td>
+          <td>{{ user.role }}</td>
+          <td>{{user.gender}}</td>
+          <td>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+              (click)="edit(user)">
+              Edit
+            </button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger" (click)="deleteUser(user)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Update User</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form #updateForm="ngForm" (ngSubmit)="updateUser()">
+          <div class="form-group">
+            <label for="id">id :</label>
+            <input type="text" disabled #id [(ngModel)]="UserToUpdate.id" name="id" id="id" class="form-control"
+              placeholder="User Roll number" />
+          </div>
+          <div class="form-group">
+            <label for="name">User Name :</label>
+            <input type="text" #username [(ngModel)]="UserToUpdate.username" name="user" id="username"
+              class="form-control" placeholder="Student userName" />
+          </div>
+          <div class="form-group">
+            <label for="email">Student email :</label>
+            <input type="text" #email [(ngModel)]="UserToUpdate.email" name="email" id="email" class="form-control"
+              placeholder="Student Email" />
+          </div>
+          <div class="form-group">
+            <label for="percentage">Student Role :</label>
+            <input type="text" #role [(ngModel)]="UserToUpdate.role" name="role" id="role" class="form-control"
+              placeholder="Student Role" />
+          </div>
+          <div class="form-group">
+            <label for="percentage">Student Gender :</label>
+            <input type="text" #role [(ngModel)]="UserToUpdate.gender" name="gender" id="gender" class="form-control"
+              placeholder="Student Role" />
+          </div>
+          <div class="form-group">
+            <input type="submit" value="Update" class="btn btn-primary w-100" />
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
